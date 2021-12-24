@@ -4,9 +4,10 @@ import game.RogueliteGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
+import static game.RogueliteGame.gameScale;
 
 public class GameObject {
     public String name;
@@ -14,7 +15,7 @@ public class GameObject {
     public boolean isVisible;
     public float posX, posY;
 
-    private BufferedImage _texture;
+    private Texture2D _texture;
 
     public GameObject(String name) {
         this.name = name;
@@ -34,22 +35,17 @@ public class GameObject {
         _texture = null;
     }
 
-    public BufferedImage getTexture() { return _texture; }
+    public Texture2D getTexture() { return _texture; }
 
     public void setTexture(String path) {
-        try {
-            _texture = ImageIO.read(new File(path));
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            RogueliteGame.isRunning = false;
-        }
+        _texture = new Texture2D(path);
     }
 
-    public void update(int deltaTime) {}
+    public void update(double deltaTime) {}
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if (_texture != null)
-            g2d.drawImage(_texture, Math.round(posX), Math.round(posY), null);
+            _texture.draw(Math.round(posX), Math.round(posY), g2d);
     }
 
 }

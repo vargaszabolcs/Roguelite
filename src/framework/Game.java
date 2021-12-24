@@ -8,26 +8,38 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
+    private static final int windowWidth  = 1024;
+    private static final int windowHeight  = 1024;
+
     protected Scene _currentScene = null;
     static public boolean isRunning = true;
 
     public Game() {
-        setPreferredSize(new Dimension(1000, 800));
+        setPreferredSize(new Dimension(windowWidth, windowHeight));
         setBackground(Color.CYAN);
     }
 
     public void run() {
-        long lastTime = System.nanoTime();
+        long lastLoopTime = System.nanoTime();
+        final int TARGET_FPS = 60;
+        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        long lastFpsTime = 0;
 
 
         while (isRunning) {
-            long time = System.nanoTime();
-            int deltaTime = (int) ((time - lastTime) / 1000000);
-            lastTime = time;
+            long now = System.nanoTime();
+            long updateLength = now - lastLoopTime;
+            lastLoopTime = now;
+            double deltaTime = updateLength / ((double)OPTIMAL_TIME);
+
+            lastFpsTime += updateLength;
+            if(lastFpsTime >= 1000000000){
+                lastFpsTime = 0;
+            }
 
             if (_currentScene != null) {
                 _currentScene.update(deltaTime);
-                repaint();
+                paintImmediately(0, 0, windowWidth, windowHeight);
             }
         }
     }

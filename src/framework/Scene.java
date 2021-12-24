@@ -10,34 +10,34 @@ import java.util.ArrayList;
 
 public class Scene implements ActionListener, KeyListener {
     protected ArrayList<GameObject> gameObjects;
-    protected Map map;
+    protected GameMap gameMap;
 
     public Scene() {
         gameObjects = new ArrayList<>();
-        map = null;
+        gameMap = null;
     }
 
     public void onEnabled() {}
     public void onDisabled() {}
 
-    public void update(int deltaTime) {
-        if (map != null)
-            map.update(deltaTime);
+    public void update(double deltaTime) {
+        if (gameMap != null)
+            gameMap.update(deltaTime);
 
         gameObjects.stream()
                 .filter(gameObject -> gameObject.updatingEnabled)
                 .forEach(gameObject -> gameObject.update(deltaTime));
     }
     public void render(Graphics g) {
-        if (map != null)
-            map.draw(g);
+        if (gameMap != null)
+            gameMap.draw(g);
 
         gameObjects.stream()
                 .filter(gameObject -> gameObject.isVisible)
                 .forEach(gameObject -> gameObject.draw(g));
     }
 
-    public Map getMap() { return map; }
+    public GameMap getMap() { return gameMap; }
     public ArrayList<GameObject> getGameObjects() { return gameObjects; }
 
     @Override
