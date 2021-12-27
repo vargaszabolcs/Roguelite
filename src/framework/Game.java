@@ -8,8 +8,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class Game extends JPanel implements ActionListener, KeyListener {
-    private static final int windowWidth  = 1024;
-    private static final int windowHeight  = 1024;
+    public static final int windowWidth  = 1024;
+    public static final int windowHeight  = 1024;
 
     protected Scene _currentScene = null;
     static public boolean isRunning = true;

@@ -25,8 +25,8 @@ public class RandomRoomMap extends GameMap {
     }
 
     private void initTextures() {
-        mapTextures.put("floor", new Texture2D("res/floor.png"));
-        mapTextures.put("wall", new Texture2D("res/wall.png"));
+        mapTextures.put("floor", new Texture2D("res/tiles/floor.png"));
+        mapTextures.put("wall", new Texture2D("res/tiles/wall.png"));
     }
 
     private void generateMapData() {

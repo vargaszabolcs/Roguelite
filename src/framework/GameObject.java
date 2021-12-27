@@ -1,15 +1,10 @@
 package framework;
 
-import game.RogueliteGame;
-
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-import static game.RogueliteGame.gameScale;
-
-public class GameObject {
+public class GameObject implements KeyListener {
     public String name;
     public boolean updatingEnabled;
     public boolean isVisible;
@@ -17,8 +12,11 @@ public class GameObject {
 
     private Texture2D _texture;
 
+    protected boolean[] keys;
+
     public GameObject(String name) {
         this.name = name;
+        keys = new boolean[65536];
         init();
     }
 
@@ -48,4 +46,21 @@ public class GameObject {
             _texture.draw(Math.round(posX), Math.round(posY), g2d);
     }
 
+    @Override
+    public String toString() {
+        return "GameObject '" + name + "' => x: " + posX + ", y: " + posY;
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        keys[e.getKeyCode()] = true;
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        keys[e.getKeyCode()] = false;
+    }
 }
