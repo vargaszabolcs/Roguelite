@@ -11,7 +11,7 @@ public class FontManager {
 
     private Map<String, Font> _fonts;
 
-    public void createFont(String name, String path) {
+    public void createFont(final String name, final String path) {
         try {
             _fonts.put(name, Font.createFont(Font.TRUETYPE_FONT, new File(path)));
         } catch (FontFormatException | IOException e) {

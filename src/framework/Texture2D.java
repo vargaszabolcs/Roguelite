@@ -15,7 +15,7 @@ public class Texture2D {
 
     public boolean flipped = false;
 
-    public Texture2D (String path) {
+    public Texture2D (final String path) {
         try {
             _bufferedImage = ImageIO.read(new File(path));
         } catch (IOException e) {

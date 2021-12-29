@@ -1,5 +1,6 @@
 package game.entities;
 
+import framework.AudioManager;
 import framework.Scene;
 import game.Entity;
 import game.RoomScene;
@@ -59,6 +60,7 @@ public class Player extends Entity {
             return;
 
         _alreadyAttacked = true;
+        AudioManager.playSound("res/audio/hit.wav");
         takeDamage(enemy);
         if (enemy.takeDamage(this)) {
             addExp(new Random().nextInt(50 - 20) + 20);
