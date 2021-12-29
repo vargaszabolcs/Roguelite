@@ -74,8 +74,8 @@ public class RoomScene extends Scene {
         for (int i = 0; i < numberOfEnemies; i++) {
             int enemyType = random.nextInt(2);
             Enemy newEnemy = switch (enemyType) {
-                case 0 -> new Enemy("minotaur", 120, 2 + Math.round((float) (_roomLevel / 2)), 5 + _roomLevel, "res/minotaurus.png", this);
-                case 1 -> new Enemy("hound", 50, 6 + _roomLevel, Math.round((float) (_roomLevel / 2)), "res/hound.png", this);
+                case 0 -> new Enemy("minotaur", 120, 2 + Math.round((float) (_roomLevel / 2)), 5 + _roomLevel, "res/graphics/minotaurus.png", this);
+                case 1 -> new Enemy("hound", 50, 6 + _roomLevel, Math.round((float) (_roomLevel / 2)), "res/graphics/hound.png", this);
                 default -> null;
             };
 

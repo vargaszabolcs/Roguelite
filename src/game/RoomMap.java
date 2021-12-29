@@ -24,8 +24,8 @@ public class RoomMap extends GameMap {
     }
 
     private void initTextures() {
-        mapTextures.put("floor", new Texture2D("res/tiles/floor.png"));
-        mapTextures.put("wall", new Texture2D("res/tiles/wall.png"));
+        mapTextures.put("floor", new Texture2D("res/graphics/tiles/floor.png"));
+        mapTextures.put("wall", new Texture2D("res/graphics/tiles/wall.png"));
     }
 
     private void generateMapData() {

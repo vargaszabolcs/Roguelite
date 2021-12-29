@@ -13,7 +13,7 @@ public class RogueliteGame extends Game {
     private RogueliteGame() {
         super();
 
-        FontManager.getInstance().createFont("Forward", "res/ui/FFFFORWA.ttf");
+        FontManager.getInstance().createFont("Forward", "res/graphics/ui/FFFFORWA.ttf");
 
         setCurrentScene(new MainMenuScene(this));
     }

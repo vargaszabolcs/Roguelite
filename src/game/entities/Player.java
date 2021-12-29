@@ -42,7 +42,7 @@ public class Player extends Entity {
         attackPoints = 10;
 
         updatingEnabled = true;
-        setTextureAndCollider("res/player.png");
+        setTextureAndCollider("res/graphics/player.png");
 
         ui = new PlayerUI(this);
     }

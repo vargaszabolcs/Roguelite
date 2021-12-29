@@ -18,7 +18,7 @@ public class MainMenuScene extends Scene {
 
     public MainMenuScene(RogueliteGame game) {
         _gameInstance = game;
-        _bg = new Texture2D("res/ui/menuBG.png");
+        _bg = new Texture2D("res/graphics/ui/menuBG.png");
     }
 
     @Override
