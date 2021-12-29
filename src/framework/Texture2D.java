@@ -11,11 +11,13 @@ import java.io.IOException;
 import static game.RogueliteGame.gameScale;
 
 public class Texture2D {
-    private BufferedImage bufferedImage;
+    private BufferedImage _bufferedImage;
+
+    public boolean flipped = false;
 
     public Texture2D (String path) {
         try {
-            bufferedImage = ImageIO.read(new File(path));
+            _bufferedImage = ImageIO.read(new File(path));
         } catch (IOException e) {
             System.out.println(e.getMessage());
             RogueliteGame.isRunning = false;
@@ -23,10 +25,15 @@ public class Texture2D {
     }
 
     public BufferedImage getRawImage() {
-        return bufferedImage;
+        return _bufferedImage;
     }
+    public int getWidth() { return _bufferedImage.getWidth() * gameScale; }
+    public int getHeight() { return _bufferedImage.getHeight() * gameScale; }
 
     public void draw(int posX, int posY, Graphics2D graphics2D) {
-        graphics2D.drawImage(bufferedImage, posX, posY, (int) (bufferedImage.getWidth() * gameScale), (int) (bufferedImage.getHeight() * gameScale), null);
+        int width = flipped ? getWidth() * -1 : getWidth();
+        int height = getHeight();
+        posX = flipped ? posX + getWidth() : posX;
+        graphics2D.drawImage(_bufferedImage, posX, posY, width, height, null);
     }
 }

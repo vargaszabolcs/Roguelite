@@ -7,14 +7,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Scene implements ActionListener, KeyListener {
     protected ArrayList<GameObject> gameObjects;
+    protected ArrayList<UI> uis;
     protected GameMap gameMap;
+
+    protected boolean[] keys;
 
     public Scene() {
         gameObjects = new ArrayList<>();
+        uis = new ArrayList<>();
         gameMap = null;
+        keys = new boolean[65536];
     }
 
     public void onEnabled() {}
@@ -24,7 +30,11 @@ public class Scene implements ActionListener, KeyListener {
         if (gameMap != null)
             gameMap.update(deltaTime);
 
+        uis.stream().filter(Objects::nonNull)
+                .forEach(go -> go.update(deltaTime));
+
         gameObjects.stream()
+                .filter(Objects::nonNull)
                 .filter(gameObject -> gameObject.updatingEnabled)
                 .forEach(gameObject -> gameObject.update(deltaTime));
     }
@@ -33,12 +43,18 @@ public class Scene implements ActionListener, KeyListener {
             gameMap.draw(g);
 
         gameObjects.stream()
+                .filter(Objects::nonNull)
                 .filter(gameObject -> gameObject.isVisible)
                 .forEach(gameObject -> gameObject.draw(g));
     }
 
     public GameMap getMap() { return gameMap; }
     public ArrayList<GameObject> getGameObjects() { return gameObjects; }
+
+    public void addGameObject(GameObject gameObject) {
+        gameObjects.add(gameObject);
+        gameObject.keys = keys;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) { }
@@ -48,11 +64,11 @@ public class Scene implements ActionListener, KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        gameObjects.forEach(gameObject -> gameObject.keyPressed(e));
+        keys[e.getKeyCode()] = true;
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        gameObjects.forEach(gameObject -> gameObject.keyReleased(e));
+        keys[e.getKeyCode()] = false;
     }
 }
