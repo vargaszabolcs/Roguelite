@@ -6,8 +6,6 @@ import framework.Texture2D;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 import static framework.Game.*;
@@ -16,7 +14,7 @@ public class MainMenuScene extends Scene {
     private final RogueliteGame _gameInstance;
     private final ArrayList<JComponent> _components = new ArrayList<>();
 
-    private Texture2D _bg;
+    private final Texture2D _bg;
 
     public MainMenuScene(RogueliteGame game) {
         _gameInstance = game;

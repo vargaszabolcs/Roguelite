@@ -1,21 +1,20 @@
 package game.ui;
 
+import framework.FontManager;
 import framework.UI;
 import game.entities.Enemy;
 
 import java.awt.*;
 
 public class EnemyUI implements UI {
-    private Enemy _enemy;
+    private final Enemy _enemy;
 
     public EnemyUI(Enemy enemy) {
         _enemy = enemy;
     }
 
     @Override
-    public void update(double deltaTime) {
-
-    }
+    public void update(double deltaTime) {}
 
     @Override
     public void render(Graphics g) {
@@ -25,8 +24,8 @@ public class EnemyUI implements UI {
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
         // Health
-        g2d.setFont(new Font("Arial", Font.PLAIN, 10));
+        g2d.setFont(FontManager.getInstance().getFont("Forward", 10));
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Health: " + _enemy.getHealthPoints(), _enemy.posX - (float)(_enemy.width / 3), _enemy.posY);
+        g2d.drawString("HP: " + _enemy.getHealthPoints(), _enemy.posX - (float)(_enemy.width / 6), _enemy.posY);
     }
 }

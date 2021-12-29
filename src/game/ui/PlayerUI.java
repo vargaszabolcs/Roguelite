@@ -1,12 +1,13 @@
 package game.ui;
 
+import framework.FontManager;
 import framework.UI;
 import game.entities.Player;
 
 import java.awt.*;
 
 public class PlayerUI implements UI {
-    private Player _player;
+    private final Player _player;
 
     public PlayerUI(Player player) {
         _player = player;
@@ -22,16 +23,18 @@ public class PlayerUI implements UI {
                 RenderingHints.KEY_TEXT_ANTIALIASING,
                 RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
 
+        int posY = 30;
+
         // Health
-        g2d.setFont(new Font("Arial", Font.BOLD, 28));
+        g2d.setFont(FontManager.getInstance().getFont("Forward", 22));
         g2d.setColor(Color.WHITE);
-        g2d.drawString("Health: " + _player.getHealthPoints(), 10, 25);
+        g2d.drawString("Health: " + _player.getHealthPoints(), 10, posY);
 
         // Stats
-        g2d.setFont(new Font("Arial", Font.PLAIN, 24));
-        g2d.drawString("ATK: " + _player.getAttackPoints(), 200, 25);
-        g2d.drawString("DEF: " + _player.getDefensePoints(), 320, 25);
-        g2d.drawString("EXP: " + _player.getExp(), 440, 25);
-        g2d.drawString("LVL: " + _player.getLevel(), 560, 25);
+        g2d.setFont(FontManager.getInstance().getFont("Forward", 18));
+        g2d.drawString("ATK: " + _player.getAttackPoints(), 200, posY);
+        g2d.drawString("DEF: " + _player.getDefensePoints(), 320, posY);
+        g2d.drawString("EXP: " + _player.getExp(), 440, posY);
+        g2d.drawString("LVL: " + _player.getLevel(), 560, posY);
     }
 }
