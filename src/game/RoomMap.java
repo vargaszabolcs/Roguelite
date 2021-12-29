@@ -7,16 +7,16 @@ import java.awt.*;
 
 import static game.RogueliteGame.gameScale;
 
-public class RandomRoomMap extends GameMap {
+public class RoomMap extends GameMap {
     private int size;
 
     private int tileSize;
 
     private final int[][] mapData;
 
-    public RandomRoomMap (int size, int tileSize) {
+    public RoomMap(int size, int tileSize) {
         this.size = size;
-        this.tileSize = (int) (tileSize * gameScale);
+        this.tileSize = tileSize * gameScale;
 
         mapData = new int[size][size];
 

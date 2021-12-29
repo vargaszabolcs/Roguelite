@@ -8,19 +8,10 @@ import game.ui.PlayerUI;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-import static game.RogueliteGame.gameScale;
-import static game.RogueliteGame.tileSize;
-import static game.RoomScene.roomSize;
 
 public class Player extends Entity {
     private int _movementSpeed = 5;
     private boolean _alreadyAttacked = false;
-    private Rectangle _playableArea = new Rectangle(
-            tileSize * gameScale,
-            tileSize * gameScale,
-            (roomSize * tileSize * gameScale) - (tileSize * gameScale) * 3,
-            (roomSize * tileSize * gameScale) - (tileSize * gameScale) * 3
-    );
 
 
     public Player (Scene parentScene) {
@@ -73,7 +64,7 @@ public class Player extends Entity {
             }
         }
 
-        if (_playableArea.contains(newPosX, newPosY)) {
+        if (((RoomScene) getParentScene()).getPlayableArea().contains(newPosX, newPosY)) {
             for (Enemy enemy : ((RoomScene) getParentScene()).getEnemies()) {
                 if (enemy.isCollidingWithRect(new Rectangle(Math.round(newPosX), Math.round(newPosY), width, height))) {
                     fight(enemy);
