@@ -2,16 +2,15 @@ package framework;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Game extends JPanel implements ActionListener, KeyListener {
+public class Game extends JPanel implements KeyListener {
     public static final int windowWidth  = 1024;
     public static final int windowHeight  = 1024;
 
-    protected Scene _currentScene = null;
+    private Scene _queuedScene = null;
+    private Scene _currentScene = null;
     static public boolean isRunning = true;
 
     public Game() {
@@ -41,6 +40,9 @@ public class Game extends JPanel implements ActionListener, KeyListener {
                 _currentScene.update(deltaTime);
                 paintImmediately(0, 0, windowWidth, windowHeight);
             }
+            if (_queuedScene != null) {
+                switchScene();
+            }
         }
     }
 
@@ -48,12 +50,17 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         return _currentScene;
     }
 
-    public void setCurrentScene(Scene scene) {
+    private void switchScene() {
         if (_currentScene != null)
             this._currentScene.onDisabled();
 
-        _currentScene = scene;
-        scene.onEnabled();
+        _currentScene = _queuedScene;
+        _queuedScene.onEnabled();
+        _queuedScene = null;
+    }
+
+    public void setCurrentScene(Scene scene) {
+        _queuedScene = scene;
     }
 
     @Override
@@ -61,11 +68,6 @@ public class Game extends JPanel implements ActionListener, KeyListener {
         super.paintComponent(g);
         if (_currentScene != null)
             _currentScene.render(g);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        _currentScene.actionPerformed(e);
     }
 
     @Override

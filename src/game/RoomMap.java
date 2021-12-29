@@ -8,9 +8,8 @@ import java.awt.*;
 import static game.RogueliteGame.gameScale;
 
 public class RoomMap extends GameMap {
-    private int size;
-
-    private int tileSize;
+    private final int size;
+    private final int tileSize;
 
     private final int[][] mapData;
 

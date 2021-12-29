@@ -2,6 +2,7 @@ package game.entities;
 
 import framework.Scene;
 import game.Entity;
+import game.RoomScene;
 import game.ui.EnemyUI;
 
 import java.util.Random;
@@ -23,5 +24,6 @@ public class Enemy extends Entity {
         isVisible = false;
         updatingEnabled = false;
         setCollider(null);
+        ((RoomScene) getParentScene()).decreaseEnemyCount();
     }
 }

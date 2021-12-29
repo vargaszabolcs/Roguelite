@@ -30,10 +30,16 @@ public class Texture2D {
     public int getWidth() { return _bufferedImage.getWidth() * gameScale; }
     public int getHeight() { return _bufferedImage.getHeight() * gameScale; }
 
+    // Simply draw the texture, taking care of scaling and flipping
     public void draw(int posX, int posY, Graphics2D graphics2D) {
         int width = flipped ? getWidth() * -1 : getWidth();
         int height = getHeight();
         posX = flipped ? posX + getWidth() : posX;
+        graphics2D.drawImage(_bufferedImage, posX, posY, width, height, null);
+    }
+
+    // Draw the image only using the provided parameters, NO scaling
+    public void draw(int posX, int posY, int width, int height, Graphics2D graphics2D) {
         graphics2D.drawImage(_bufferedImage, posX, posY, width, height, null);
     }
 }

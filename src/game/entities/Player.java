@@ -7,12 +7,33 @@ import game.ui.PlayerUI;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 
 public class Player extends Entity {
     private int _movementSpeed = 5;
+    private int _level = 1;
+    private int _exp = 0;
+    private int _expCap = 100;
     private boolean _alreadyAttacked = false;
 
+    public int getLevel() { return _level; }
+    public int getExp() { return _exp; }
+
+    public void addExp(int exp) {
+        _exp += exp;
+        if (_exp >= _expCap) {
+            levelUp();
+            _exp = Math.max(_exp - _expCap, 0);
+        }
+    }
+
+    public void levelUp() {
+        _level++;
+        healthPoints = 100;
+        attackPoints++;
+        defensePoints++;
+    }
 
     public Player (Scene parentScene) {
         super("player", 100, 10, 1, parentScene);
@@ -39,7 +60,9 @@ public class Player extends Entity {
 
         _alreadyAttacked = true;
         takeDamage(enemy);
-        enemy.takeDamage(this);
+        if (enemy.takeDamage(this)) {
+            addExp(new Random().nextInt(50 - 20) + 20);
+        }
         System.out.println(name + "(" + healthPoints + ") attacking " + enemy.name + "(" + enemy.getHealthPoints() + ")");
     }
 

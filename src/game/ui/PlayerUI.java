@@ -31,5 +31,7 @@ public class PlayerUI implements UI {
         g2d.setFont(new Font("Arial", Font.PLAIN, 24));
         g2d.drawString("ATK: " + _player.getAttackPoints(), 200, 25);
         g2d.drawString("DEF: " + _player.getDefensePoints(), 320, 25);
+        g2d.drawString("EXP: " + _player.getExp(), 440, 25);
+        g2d.drawString("LVL: " + _player.getLevel(), 560, 25);
     }
 }

@@ -45,6 +45,9 @@ public class GameObject implements KeyListener {
     public Rectangle getCollider() { return _collider; }
     public Scene getParentScene() { return _parentScene; }
 
+    public void setParentScene(Scene parentScene) {
+        _parentScene = parentScene;
+    }
 
     public void setTexture(String path) {
         _texture = new Texture2D(path);

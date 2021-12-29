@@ -22,14 +22,17 @@ public class Entity extends GameObject {
         this.defensePoints = defensePoints;
     }
 
-    public void takeDamage(Entity attackingEntity) {
+    // Deals damage, returns true if dies from attack
+    public boolean takeDamage(Entity attackingEntity) {
         if (healthPoints > 0) {
             healthPoints -= Math.max(attackingEntity.attackPoints - defensePoints, 1);
             healthPoints = Math.max(healthPoints, 0);
             if (healthPoints == 0) {
                 die();
+                return true;
             }
         }
+        return false;
     }
 
     public int getHealthPoints() { return healthPoints; }

@@ -7,7 +7,7 @@ public class Application extends JFrame {
     public Application () {
         super("Roguelite");
 
-        Game game = new RogueliteGame();
+        Game game = RogueliteGame.getInstance();
         add(game);
         addKeyListener(game);
 
