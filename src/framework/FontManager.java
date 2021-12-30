@@ -6,12 +6,23 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * FontManager: Load font/fonts into a hash map, the font only needs to be loaded once,
+ * then can be used as many times as required.
+ * Singleton design
+ */
+
 public class FontManager {
     private static FontManager instance = null;
 
-    private Map<String, Font> _fonts;
+    private final Map<String, Font> _fonts;
 
     public void createFont(final String name, final String path) {
+        if (_fonts.containsKey(name)) {
+            System.out.println("Font already loaded!");
+            return;
+        }
+
         try {
             _fonts.put(name, Font.createFont(Font.TRUETYPE_FONT, new File(path)));
         } catch (FontFormatException | IOException e) {

@@ -1,8 +1,9 @@
-package game;
+package game.scenes;
 
 import framework.FontManager;
 import framework.Scene;
 import framework.Texture2D;
+import game.core.RogueliteGame;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,6 +28,7 @@ public class MainMenuScene extends Scene {
         _gameInstance.setLayout(new GridBagLayout());
         Font font = FontManager.getInstance().getFont("Forward", 12);
 
+        // Add buttons
         JButton startGameButton = new JButton("Start Game");
         startGameButton.setFont(font);
         startGameButton.addActionListener(e -> _gameInstance.setFirstLevel());
@@ -42,6 +44,8 @@ public class MainMenuScene extends Scene {
         addComponent(startGameButton, 1, 0);
         addComponent(optionsButton, 1, 1);
         addComponent(exitButton, 1, 2);
+
+        _gameInstance.revalidate();
     }
 
     private void addComponent(JComponent component, int x, int y) {
@@ -64,6 +68,7 @@ public class MainMenuScene extends Scene {
     public void onDisabled() {
         super.onDisabled();
 
+        // Remove buttons
         for (JComponent component : _components) {
             _gameInstance.remove(component);
         }
@@ -78,6 +83,7 @@ public class MainMenuScene extends Scene {
     public void render(Graphics g) {
         super.render(g);
 
+        // Draw background
         _bg.draw(0, 0, windowWidth, windowHeight, (Graphics2D) g);
     }
 }

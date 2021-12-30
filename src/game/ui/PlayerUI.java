@@ -14,9 +14,6 @@ public class PlayerUI implements UI {
     }
 
     @Override
-    public void update(double deltaTime) {}
-
-    @Override
     public void render(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(

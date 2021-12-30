@@ -5,6 +5,11 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
+/**
+ * AudioManager: Manage audio, play sfx.
+ * Static class
+ */
+
 public class AudioManager {
     public static void playSound(final String path) {
         try {

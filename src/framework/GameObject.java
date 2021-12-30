@@ -4,6 +4,11 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * GameObject: a renderable object that can be placed in the game and can have logic.
+ * Ticking/Updating is tuned off by default for performance reasons
+ */
+
 public class GameObject implements KeyListener {
     public String name;
     public boolean updatingEnabled;
@@ -49,36 +54,43 @@ public class GameObject implements KeyListener {
         _parentScene = parentScene;
     }
 
+    // Set texture and also set width and height properties of this object. BEWARE: if width and height were already set, they will be overridden!
     public void setTexture(String path) {
         _texture = new Texture2D(path);
         width = _texture.getWidth();
         height = _texture.getHeight();
     }
+
+    // Set collider data
     public void setCollider(Rectangle rectangle) {
         _collider = rectangle;
     }
     public void setCollider(int width, int height) {
         _collider = new Rectangle(Math.round(posX), Math.round(posY), width, height);
     }
+    // Collider data need to be updated every tick
     public void updateColliderPosition() {
         if (_collider != null) {
             _collider.x = Math.round(posX);
             _collider.y = Math.round(posY);
         }
     }
+    // Set texture and collider data based on set texture
     public void setTextureAndCollider(String path) {
         setTexture(path);
         setCollider(_texture.getWidth(), _texture.getHeight());
     }
 
-    public boolean isCollidingWithGameObject(GameObject gameObject) {
+    // Test collision between this object and given gameObject/rectangle
+    public boolean isColliding(GameObject gameObject) {
         if (_collider == null || gameObject.getCollider() == null) {
             return false;
         }
 
        return _collider.intersects(gameObject.getCollider());
     }
-    public boolean isCollidingWithRect(Rectangle rectangle) {
+
+    public boolean isColliding(Rectangle rectangle) {
         if (_collider == null) {
             return false;
         }
@@ -88,9 +100,8 @@ public class GameObject implements KeyListener {
 
     public void update(double deltaTime) {
         updateColliderPosition();
-        if (ui != null)
-            ui.update(deltaTime);
     }
+
     public void draw(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         if (_texture != null)

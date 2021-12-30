@@ -1,11 +1,11 @@
-package game;
+package game.maps;
 
 import framework.GameMap;
 import framework.Texture2D;
 
 import java.awt.*;
 
-import static game.RogueliteGame.gameScale;
+import static game.core.RogueliteGame.gameScale;
 
 public class RoomMap extends GameMap {
     private final int size;
@@ -28,16 +28,18 @@ public class RoomMap extends GameMap {
         mapTextures.put("wall", new Texture2D("res/graphics/tiles/wall.png"));
     }
 
+    // Populate mapData with generated tiles
     private void generateMapData() {
         for (int y = 0; y < size; y++) {
             for (int x = 0; x < size; x++) {
                 mapData[y][x] = generateMapTile(x, y);
-                System.out.print(mapData[y][x]);
+                //System.out.print(mapData[y][x]);
             }
-            System.out.println();
+            //System.out.println();
         }
     }
 
+    // Generate tiles based on tile position
     private int generateMapTile (int x, int y) {
         // Top and bottom wall
         if (y == 0 || y == size - 1) {
@@ -51,6 +53,7 @@ public class RoomMap extends GameMap {
         return 0;
     }
 
+    // Convert tile data to texture
     private Texture2D tileCodeToTexture(int tile) {
         switch (tile){
             case 0:

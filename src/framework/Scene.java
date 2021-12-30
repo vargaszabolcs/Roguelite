@@ -1,24 +1,25 @@
 package framework;
 
-
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Scene implements ActionListener, KeyListener {
+/**
+ * Scene: base class of scenes
+ * Takes care of Game Object updating and rendering.
+ * Also handles maps.
+ */
+
+public class Scene implements KeyListener {
     protected ArrayList<GameObject> gameObjects;
-    protected ArrayList<UI> uis;
     protected GameMap gameMap;
 
     protected boolean[] keys;
 
     public Scene() {
         gameObjects = new ArrayList<>();
-        uis = new ArrayList<>();
         gameMap = null;
         keys = new boolean[65536];
     }
@@ -29,9 +30,6 @@ public class Scene implements ActionListener, KeyListener {
     public void update(double deltaTime) {
         if (gameMap != null)
             gameMap.update(deltaTime);
-
-        uis.stream().filter(Objects::nonNull)
-                .forEach(go -> go.update(deltaTime));
 
         gameObjects.stream()
                 .filter(Objects::nonNull)
@@ -57,11 +55,9 @@ public class Scene implements ActionListener, KeyListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) { }
-
-    @Override
     public void keyTyped(KeyEvent e) { }
 
+    // Java's input event system is turned into input polling system. Makes implementing actions based on input and delta time easier.
     @Override
     public void keyPressed(KeyEvent e) {
         keys[e.getKeyCode()] = true;

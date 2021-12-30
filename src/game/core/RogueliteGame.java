@@ -1,11 +1,12 @@
-package game;
+package game.core;
 
 import framework.FontManager;
 import framework.Game;
 import game.entities.Player;
+import game.scenes.MainMenuScene;
+import game.scenes.RoomScene;
 
 public class RogueliteGame extends Game {
-    public static final int gameScale = 2;
     public static final int tileSize = 16;
 
     private static RogueliteGame instance = null;
@@ -13,17 +14,18 @@ public class RogueliteGame extends Game {
     private RogueliteGame() {
         super();
 
+        // Load font into game
         FontManager.getInstance().createFont("Forward", "res/graphics/ui/FFFFORWA.ttf");
 
-        setCurrentScene(new MainMenuScene(this));
+        openMainMenu();
     }
 
+    public void openMainMenu() { requestSceneSwitch(new MainMenuScene(this)); }
     public void setFirstLevel() {
-        setCurrentScene(new RoomScene());
+        requestSceneSwitch(new RoomScene());
     }
-
     public void advanceToNextRoom(Player player, int nextRoomLevel) {
-        setCurrentScene(new RoomScene(player, nextRoomLevel));
+        requestSceneSwitch(new RoomScene(player, nextRoomLevel));
     }
 
     public static RogueliteGame getInstance()

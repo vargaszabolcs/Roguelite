@@ -1,6 +1,6 @@
 package framework;
 
-import game.RogueliteGame;
+import game.core.RogueliteGame;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -8,7 +8,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-import static game.RogueliteGame.gameScale;
+import static game.core.RogueliteGame.gameScale;
+
+/**
+ * Texture2D: wrapper for BufferedImage with a bit of extra functionality
+ */
 
 public class Texture2D {
     private BufferedImage _bufferedImage;
@@ -27,6 +31,7 @@ public class Texture2D {
     public BufferedImage getRawImage() {
         return _bufferedImage;
     }
+
     public int getWidth() { return _bufferedImage.getWidth() * gameScale; }
     public int getHeight() { return _bufferedImage.getHeight() * gameScale; }
 

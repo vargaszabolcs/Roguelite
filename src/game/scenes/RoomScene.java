@@ -1,6 +1,7 @@
-package game;
+package game.scenes;
 
 import framework.Scene;
+import game.maps.RoomMap;
 import game.entities.Enemy;
 import game.entities.Player;
 
@@ -10,7 +11,7 @@ import java.util.Random;
 
 import static framework.Game.windowHeight;
 import static framework.Game.windowWidth;
-import static game.RogueliteGame.*;
+import static game.core.RogueliteGame.*;
 
 public class RoomScene extends Scene {
     public static final int roomSize = 32;

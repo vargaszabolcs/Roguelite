@@ -5,9 +5,16 @@ import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Game: Core class of the framework.
+ * Manages scenes, sets up window.
+ * Also contains main game loop.
+ */
+
 public class Game extends JPanel implements KeyListener {
     public static final int windowWidth  = 1024;
     public static final int windowHeight  = 1024;
+    public static final int gameScale = 2;
 
     private Scene _queuedScene = null;
     private Scene _currentScene = null;
@@ -19,27 +26,32 @@ public class Game extends JPanel implements KeyListener {
     }
 
     public void run() {
+        // Delta time
         long lastLoopTime = System.nanoTime();
-        final int TARGET_FPS = 60;
-        final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
+        final int targetFps = 60;
+        final long optimalTime = 1000000000 / targetFps;
         long lastFpsTime = 0;
 
 
         while (isRunning) {
+            // Delta time
             long now = System.nanoTime();
             long updateLength = now - lastLoopTime;
             lastLoopTime = now;
-            double deltaTime = updateLength / ((double)OPTIMAL_TIME);
+            double deltaTime = updateLength / ((double)optimalTime);
 
             lastFpsTime += updateLength;
             if(lastFpsTime >= 1000000000){
                 lastFpsTime = 0;
             }
 
+            // Update and render
             if (_currentScene != null) {
                 _currentScene.update(deltaTime);
                 paintImmediately(0, 0, windowWidth, windowHeight);
             }
+
+            // Switch scenes if there are queued scenes waiting
             if (_queuedScene != null) {
                 switchScene();
             }
@@ -59,7 +71,8 @@ public class Game extends JPanel implements KeyListener {
         _queuedScene = null;
     }
 
-    public void setCurrentScene(Scene scene) {
+    // Queues up the requested scene. The scene will only be switched at the end of the game loop to avoid errors.
+    public void requestSceneSwitch(Scene scene) {
         _queuedScene = scene;
     }
 

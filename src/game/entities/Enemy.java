@@ -1,8 +1,8 @@
 package game.entities;
 
 import framework.Scene;
-import game.Entity;
-import game.RoomScene;
+import game.core.Entity;
+import game.scenes.RoomScene;
 import game.ui.EnemyUI;
 
 import java.util.Random;

@@ -1,7 +1,12 @@
-package game;
+package game.core;
 
 import framework.GameObject;
 import framework.Scene;
+
+/**
+ * Entity: A Game Object that has health, attack and defense points.
+ * Can also be killed.
+ */
 
 public class Entity extends GameObject {
     protected int healthPoints;

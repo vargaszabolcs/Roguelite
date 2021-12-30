@@ -1,5 +1,5 @@
 import framework.Game;
-import game.RogueliteGame;
+import game.core.RogueliteGame;
 
 import javax.swing.*;
 
